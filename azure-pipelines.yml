@@ -9,6 +9,18 @@ steps:
     publishJUnitResults: false
     tasks: 'assembleDebug'
 
+steps:
+- task: Gradle@2
+  displayName: 'gradlew assembleDebug'
+  inputs:
+    gradleWrapperFile: 'MobileApp/SourceCode -Android/gradlew'
+    workingDirectory: 'MobileApp/SourceCode -Android'
+    tasks: assembleDebug
+    publishJUnitResults: false
+    checkStyleRunAnalysis: true
+    findBugsRunAnalysis: true
+    pmdRunAnalysis: true
+
 - task: Gradle@2
   inputs:
     workingDirectory: ''

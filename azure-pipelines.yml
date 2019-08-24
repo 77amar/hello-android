@@ -1,5 +1,6 @@
 pool:
   vmImage: 'macOS 10.13'
+
 - task: Gradle@2
  inputs:
    workingDirectory: ''
@@ -11,3 +12,4 @@ pool:
    publishJUnitResults: false
    testResultsFiles: '**/TEST-*.xml'
    tasks: 'assembleRelease'
+

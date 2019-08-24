@@ -1,56 +1,13 @@
 pool:
   vmImage: 'macOS 10.13'
-
-
-steps:
 - task: Gradle@2
-  displayName: 'gradlew assembleDebug'
-  inputs:
-    gradleWrapperFile: 'MobileApp/SourceCode -Android/gradlew'
-    workingDirectory: 'MobileApp/SourceCode -Android'
-    tasks: assembleDebug
-    publishJUnitResults: false
-    checkStyleRunAnalysis: true
-    findBugsRunAnalysis: true
-    pmdRunAnalysis: true
-
-- task: Gradle@2
-  inputs:
-    workingDirectory: ''
-    gradleWrapperFile: 'gradlew'
-    publishJUnitResults: false
-    tasks: 'assembleRelease'
-
-- task: CopyFiles@2
-  inputs:
-    contents: '**/*.apk'
-    targetFolder: '$(build.artifactStagingDirectory)'
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: '$(build.artifactStagingDirectory)/app/build/outputs/'
-    artifactName: 'apk-files'
-    artifactType: 'container'
-
-- task: CopyFiles@2
-  inputs:
-    contents: '**/*.apk'
-    targetFolder: '$(build.artifactStagingDirectory)'
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: '$(build.artifactStagingDirectory)/app/build/outputs/'
-    artifactName: 'apk-files'
-    artifactType: 'container'
-
-# Android signing
-# Sign and align Android APK files
-- task: AndroidSigning@2
-  inputs:
-    apkFiles: '**/*.apk'
-    jarsign: true
-    jarsignerKeystoreFile: 'pathToYourKeystoreFile'
-    jarsignerKeystorePassword: '$(jarsignerKeystorePassword)'
-    jarsignerKeystoreAlias: 'yourKeystoreAlias'
-    jarsignerKeyPassword: '$(jarsignerKeyPassword)'
-    zipalign: true
+ inputs:
+   workingDirectory: ''
+   gradleWrapperFile: 'gradlew'
+   gradleOptions: '-Xmx3072m'
+   javaHomeOption: 'JDKVersion'
+   jdkVersionOption: '1.8'
+   jdkArchitectureOption: 'x64'
+   publishJUnitResults: false
+   testResultsFiles: '**/TEST-*.xml'
+   tasks: 'assembleRelease'

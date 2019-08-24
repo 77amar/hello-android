@@ -13,3 +13,6 @@ pool:
    testResultsFiles: '**/TEST-*.xml'
    tasks: 'assembleRelease'
 
+- task: AndroidSigning@3
+  inputs:
+    apkFiles: '**/*.apk'
